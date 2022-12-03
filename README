@@ -1,0 +1,29 @@
+Tema 2 - PCLP - Vasile Alexandru Gabriel
+
+Pentru aceasta tema am folosit o colectie de matrice, care este de fapt un
+vector de 3 dimensiuni, unde prima dimensiune reprezinta numarul matricei din
+colectie, iar a doua si a treia dimensiune reprezinta matricea in sine.
+Pentru a stii cate linii, coloane si care este suma elementelor pentru fiecare
+matrice, folosim 3 vectori separati, evident alocati dinamic pentru a folosi
+eficient memoria. Pe langa, mai folosesc un contor prin care stiu cate matrice
+am alocat pana la un moment dat.
+Pentru operatia de tip LOAD am creat o functie prin care incrementez contorul
+numarului de matrice si evident actualizez dimensiunea colectiei, dimensiunea
+contoroului de linii, coloane si suma, dupa care salvez noile informatii
+(linii, coloane, suma elementelor) despre matricea citita in variabilele 
+(contoarele) necesare, carora le - am actualizat dimensiunile.
+Pentru operatia de tip DIMENSIONS am creat o functie in care decid daca numarul
+matricei asupra careia se face interogarea este valid si daca nu este, afisez 
+mesajul de eroare, iar daca este valid afisez dimensiunea din vectorii 
+contori aferenti.
+Pentru operatia de tip PRINT am folosit o functie prin care verific daca
+numarul matricei este valid si folosind vectorii contori necesari
+afisez informatiile necesare cerintei.
+Pentru operaita de tip CROP, in functia aferenta, verific in primul rand
+daca indexul matricei este valid. In cazul in care indexul matricei este
+valid creez o matrice auxiliara in care salvez din matricea originala
+elementele care se afla la intersectia dintre liniile si coloanele date in
+interiorul comenzii, dupa care eliberez memoria adresata matricei originale
+si aloc alta memorie, in functie de noile dimensiuni, in care salvez elementele
+din matricea auxiliara. Dupa care eliberez memoria folosita pentru matricea
+auxiliara.
