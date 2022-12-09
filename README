@@ -1,29 +1,106 @@
-Tema 2 - PCLP - Vasile Alexandru Gabriel
+# Copyright 2022 Vasile Alexandru Gabriel <vasilealexandru37@gmail.com>
 
-Pentru aceasta tema am folosit o colectie de matrice, care este de fapt un
-vector de 3 dimensiuni, unde prima dimensiune reprezinta numarul matricei din
-colectie, iar a doua si a treia dimensiune reprezinta matricea in sine.
-Pentru a stii cate linii, coloane si care este suma elementelor pentru fiecare
-matrice, folosim 3 vectori separati, evident alocati dinamic pentru a folosi
-eficient memoria. Pe langa, mai folosesc un contor prin care stiu cate matrice
-am alocat pana la un moment dat.
-Pentru operatia de tip LOAD am creat o functie prin care incrementez contorul
-numarului de matrice si evident actualizez dimensiunea colectiei, dimensiunea
-contoroului de linii, coloane si suma, dupa care salvez noile informatii
-(linii, coloane, suma elementelor) despre matricea citita in variabilele 
-(contoarele) necesare, carora le - am actualizat dimensiunile.
-Pentru operatia de tip DIMENSIONS am creat o functie in care decid daca numarul
-matricei asupra careia se face interogarea este valid si daca nu este, afisez 
-mesajul de eroare, iar daca este valid afisez dimensiunea din vectorii 
-contori aferenti.
-Pentru operatia de tip PRINT am folosit o functie prin care verific daca
-numarul matricei este valid si folosind vectorii contori necesari
-afisez informatiile necesare cerintei.
-Pentru operaita de tip CROP, in functia aferenta, verific in primul rand
-daca indexul matricei este valid. In cazul in care indexul matricei este
-valid creez o matrice auxiliara in care salvez din matricea originala
-elementele care se afla la intersectia dintre liniile si coloanele date in
-interiorul comenzii, dupa care eliberez memoria adresata matricei originale
-si aloc alta memorie, in functie de noile dimensiuni, in care salvez elementele
-din matricea auxiliara. Dupa care eliberez memoria folosita pentru matricea
-auxiliara.
+Pentru aceasta tema, am folosit un loop infinit pe care il parcurgem si
+verificam, de fiecare data, ce operatie cere utilizatorul programului
+prin citirea unei litere de la tastatura. Daca apare o comanda nerecunoscuta
+afisam un mesaj corespunzator pe ecran si trecem la urmatoarea operatie.
+Matricile citite vor fi stocate intr - un "vector de matrice", un triplu
+ponter, dimensiunile matricelor vor fi stocate in 2 vectori, iar numarul
+de matrice va fi retinut intr - o variabila simpla.
+
+Inainte de a parcurge fiecare operatie in parte, am creat cateva subprograme
+utile pentru a ne usura munca in rezolvarea operatiilor cerute (eliberari,
+alocari sau swap intre diferite tipuri pointeri(simplu, dublu, triplu, ...)).
+
+Pentru operatia de tip "LOAD" : realocam toate elementele implicate in
+retinerea datelor despre matrice (colectia de matrice si vectorii care raspund
+de dimensiunile matricelor), citim numarul de linii, numarul de coloane,
+elementele matricei si memoram toate aceste informatii in vectorii
+corespunzatori.
+
+Pentru operatia de tip "DIMENSIONS" : Verificam daca indexul dat de
+utilizator este valid. Daca nu este valid afisam mesajul corespunzator.
+Daca este valid, afisam numarul de linii si numarul de coloane prin
+vectorii aferenti.
+
+Pentru operatia de tip "PRINT" : Verificam daca indexul matricei dat de
+utilizator est valid. Daca nu este valid, afisam mesajul corespunzator.
+Daca este valid, afisam matricea corespunzatoare indexului prin elementele
+aferente.
+
+Pentru operatia de tip "CROP" : Aloc, temporar, o matrice auxiliara
+in care o sa retin elementele date de intersectia dintre liniile si
+coloanele date de utilizator, din matricea initiala. Dealoc memoria folosita
+pentru matricea initiala si aloc o noua memorie pentru noile dimensiuni ale
+matricei date(aceleasi cu dimensiunile matricei temporare). Copiez elementele
+din matricea temporara in matricea data si eliberez memoria alocata pentru
+matricea temporara.
+
+Pentru operatia de tip "MULTIPLY" : Verific daca indecsii matricelor date de
+utilizator sunt valizi si daca numarul de coloane a primei matrice este egal
+cu numarul de linii a celei de a doua matrice. In cazul in care ceva nu este
+valid afisez mesajele corespunzatoare. Daca inputul este valid, realoc
+elementele necesare memorarii de matrice si a informatiilor despre ele,
+aplic inmultirea clasica cu 3 for - uri si adaug matricea la finalul
+colectiei mele de matrice, adaugand si informatiile despre dimensiunea
+noii matrice.
+
+Pentru operatia de tip "SORT" : Creez o functie care imi calculeaza pentru
+orice matrice suma elementelor modulo MOD(10^4 + 7). Folosind Bubble Sort
+sortam colectia de matrice in functie de suma fiecarei matrice folosind
+o functie care ne permite sa dam swap intre doi pointeri (pointeri la matrice).
+
+Pentru operaita de tip "ERASE" : Verificam daca indexul matricei pe care
+utilizatorul doreste sa o stearga din colectie este valid si daca nu este,
+afisam mesajul corespunzator. Daca indexul este valid, mutam matricea
+la finalul colectiei, folosind ca la functia de mai sus o functie de swap
+intre pointeri(pointeri la matrice), si eliberam memoria alocata pentru ea.
+De asemenea, actualizam numarul de matrice din colectie.
+
+Pentru operaita de tip "Transpose" : Verificam daca indexul matricei date de
+utilizator este valid si afisam mesajul corespunzator in cazul in care nu este.
+Daca indexul este valid, creez o matrice temporara in care aloc dimensiunile
+rasturnate ale matricei initiale si in care retin transpusa prorpiu-zisa.
+Actualizez memoria pentru matricea data si copiez elementele din matricea
+temporara in ea. La final dealoc memoria folosita pentru matricea auxiliara
+si actualizez dimensiunile noii matrice din colectie.
+
+Pentru operaita de tip "POW" : Verificam integritatea inputului dat de
+utilizator si afisam mesajele corespunzatoare in cazul in care ceva este gresit
+in input. Daca totul este valid, aloc o matrice in care o sa retin mereu puteri
+de forma (matrice)^(2^i) cu i de la 0 la 31 si salvez in aceasta matrice
+matricea initiala(adica matricea initiala la puterea 2^0). In matricea initiala
+pun matricea identitate(adica matricea initiala ridicata la puterea 0). Pentru
+a ridica efectiv la putere in timp logaritmic parcurg bitii puterii, iar daca
+am gasit un bit activat, actualizez matricea noastra (o inmultesc cu matricea
+in care retin matricea initiala la puteri de tip 2^i). La final dealoc memoria
+folosita pentru matricea auxiliara.
+
+
+Pentru operatia de tip "QUIT" : Dealoc absolut tot folosit implicat in memoria
+matricelor si a memorarii dimensiunilor lor(colectia si vectorii corespunzatori
+).
+
+Pentru efectuarea algoritmului lui Strassen : Verificam integriatatea datelor
+date de utilizator in input si afisam mesajul corespunzator daca ceva nu este
+valid. Realocam elemntele implicate in memorarea matricelor si a dimensiunilor
+lor, pentru a adauga noua matrice (la finalul colectiei) si noile dimensiuni.
+In implementarea functiei recursive am ales sa pastrez numele variabilelor
+ca cele din explicatia data in tema, pentru a fi mai usor de inteles
+implementarea algoritmului. Recursivitatea vine din determinarea matricelor M.
+Iar pentru implementare respectam exact indicatiile date in tema, folosind
+cateva functii de adunare/diferenta/partitionare de matrice, asa cum avem
+explicat in tema si 2 matrice auxiliare in care memoram diferite operatii de
+adunare/scadere. Dupa ce am terminat un pas din functia recursiva dealocam
+toate resursele folosite la acel pas.
+
+
+Pentru programarea defensiva am ales o variabila pe care o transmit mereu ca
+parametru in functiile in care aloc sau realoc memorie pentru anumiti pointeri
+si care are valoarea 1 atunci cand o alocare sau realocare nu a functionat,
+moment in care eliberam memoria alocata pentru acea functie pana in acel
+moment, ne intoarcem in main unde eliberam absolut tot prin functia quit.
+Astfel dupa fiecare alocare/realocare verificam valoarea variabilei noastre si
+daca ceva nu a functionat realizam ceea ce am scris anterior si afisam un mesaj
+sugestiv.
+
